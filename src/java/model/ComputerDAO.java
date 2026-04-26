@@ -31,7 +31,7 @@ public class ComputerDAO {
 
                 while(rs.next()) { // co ket qua la true                  
                     int price = rs.getInt("Price");
-                    String name = rs.getString("name");
+                    String name = rs.getString("Name");
                     String ram = rs.getString("Ram");
                     computerDTO = new ComputerDTO(name,ram,price);
                     computerList.add(computerDTO);
