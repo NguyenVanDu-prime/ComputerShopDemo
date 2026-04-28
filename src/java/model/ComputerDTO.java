@@ -71,7 +71,7 @@ public class ComputerDTO {
 
     @Override
     public String toString() {
-        return "Computer{" + "id=" + id + ", name=" + name + ", description=" + description + ", ram=" + ram + ", price=" + price + '}';
+        return  "id=" + id + ", name=" + name + ", description=" + description + ", ram=" + ram + ", price=" + price ;
     }
     
     
