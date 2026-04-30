@@ -13,10 +13,12 @@
     </head>
     <body>
        <div>Add computer Info</div>
-        <form action = "AddComputerInfoServlet" method = POST>
-            Name : <input type = "text" name = "nb1" /> 
-            Ram  : <input type= "text" name = "nb2" />
-            price : <input type = "text" name = "nb3" />
+        <form action = "AddComputerServlet" method = POST>
+            Id    : <input type = "text" name= "nb1">
+            Name  : <input type = "text" name = "nb2" /> 
+            Description : <input type = "text" name = "nb3">
+            Ram   : <input type= "text" name = "nb4" />
+            price : <input type = "text" name = "nb5" />
             
             <input type= "submit" name = "action" value="AddInfo"> <br>
             Sum : ${TongTien} <br>

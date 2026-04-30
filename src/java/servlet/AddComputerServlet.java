@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
+
 package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,24 +28,38 @@ public class AddComputerServlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    private final ArrayList<ComputerDTO> computerList = new ArrayList<>();
+    ArrayList<ComputerDTO> computerList = new ArrayList<>();
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            
-            ComputerDTO computer  = new ComputerDTO();
-            computer.setName(request.getParameter("nb2"));
+        try {
+            int sum = 0;
+            ComputerDTO computer = new ComputerDTO();
             computer.setId(request.getParameter("nb1"));
+            computer.setName(request.getParameter("nb2"));
             computer.setDescription(request.getParameter("nb3"));
             computer.setRam(request.getParameter("nb4"));
-            computer.setPrice(Integer.parseInt(request.getParameter("nb5")));
+            int price = Integer.parseInt(request.getParameter("nb5"));
+            computer.setPrice(price);
             computerList.add(computer);
+            if(computerList.size() <= 1){
+                System.out.println("List is empty");
+            }
+            else{
+                System.out.println("addSucess");    
+            }
+            request.setAttribute("List_Of_Computer", computerList);
             System.out.println(computerList);
+            for(ComputerDTO a : computerList){
+                sum += a.getPrice();
+            }
+            System.out.println(sum);
+            request.setAttribute("TongTien", sum);
             
-           
-        } catch(Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
+        } finally {
+            request.getRequestDispatcher("index2.jsp").forward(request, response);
         }
     }
 
