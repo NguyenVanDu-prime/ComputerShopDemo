@@ -13,7 +13,7 @@
     </head>
     <body>
        <div>Add computer Info</div>
-        <form action = "AddComputerServlet" method = POST>
+        <form action = "AddComputerToListServlet" method = POST>
             Id    : <input type = "text" name= "nb1">
             Name  : <input type = "text" name = "nb2" /> 
             Description : <input type = "text" name = "nb3">

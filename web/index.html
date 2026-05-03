@@ -10,15 +10,16 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <form action="AddComputerServlet" method="POST" >
-            id : <input type="text" name="nb1">
-            name:<input type="text" name="nb2">
-            description:<input type="text" name="nb3">
-            ram: <input type="text" name="nb4">
-            price: <input type="text" name="nb5">
+        <div>Add computer Info</div>
+        <form action = "AddComputerToListServlet" method = POST>
+            Id    : <input type = "text" name= "nb1">
+            Name  : <input type = "text" name = "nb2" /> 
+            Description : <input type = "text" name = "nb3">
+            Ram   : <input type= "text" name = "nb4" />
+            price : <input type = "text" name = "nb5" />
             
-            <input type="submit" name="action" value="addComputer">
+            <input type= "submit" name = "action" value="AddInfo">
+            
         </form>
-        
     </body>
 </html>
