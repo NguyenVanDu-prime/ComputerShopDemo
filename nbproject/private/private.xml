@@ -4,15 +4,11 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/admin/OneDrive/Documents/NetBeansProjects/ComputerShop/src/java/model/ComputerDAO.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/NetBeansProjects/ComputerShop/web/AddComputerToDB.html</file>
             <file>file:/C:/Users/admin/OneDrive/Documents/NetBeansProjects/ComputerShop/src/java/model/AccountDTO.java</file>
             <file>file:/C:/Users/admin/OneDrive/Documents/NetBeansProjects/ComputerShop/web/AddComputerToList2.jsp</file>
             <file>file:/C:/Users/admin/OneDrive/Documents/NetBeansProjects/ComputerShop/src/java/servlet/AddComputerToDBServlet.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/NetBeansProjects/ComputerShop/web/fail.html</file>
             <file>file:/C:/Users/admin/OneDrive/Documents/NetBeansProjects/ComputerShop/src/java/servlet/LoginServlet.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/NetBeansProjects/ComputerShop/src/java/servlet/GetAllComputerServlet.java</file>
             <file>file:/C:/Users/admin/OneDrive/Documents/NetBeansProjects/ComputerShop/src/java/model/AccountDao.java</file>
-            <file>file:/C:/Users/admin/OneDrive/Documents/NetBeansProjects/ComputerShop/src/java/servlet/AddComputerToListServlet.java</file>
         </group>
     </open-files>
 </project-private>

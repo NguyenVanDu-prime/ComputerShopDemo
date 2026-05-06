@@ -9,7 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import org.apache.catalina.Role;
 import utils.DBUtils;
 
 public class AccountDao {
@@ -78,5 +80,70 @@ public class AccountDao {
             }
         }
         return listOfAccount;
+    }
+
+    public HashSet<String> getAllRole() throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        HashSet<String> listOfRole = new HashSet<>();
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null){
+                ptm = conn.prepareStatement("Select Role from Account");
+                rs = ptm.executeQuery();
+                while(rs.next()){
+                    String role = rs.getNString("Role");
+                    listOfRole.add(role);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listOfRole;
+    }
+
+    public boolean registerAccount(AccountDTO account) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        boolean result = false;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement("INSERT INTO Account (Name, Password, Role)\n"
+                        + "VALUES \n"
+                        + "(?,?,?)");
+                ptm.setString(1, account.getName());
+                ptm.setString(2, account.getPassword());
+                ptm.setString(3, account.getRole());
+
+                int rows = ptm.executeUpdate();
+                if (rows > 0) {
+                    return true;
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return result;
     }
 }
