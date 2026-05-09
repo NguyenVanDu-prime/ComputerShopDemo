@@ -86,4 +86,42 @@ public class ComputerDAO {
         return result;
     }
 
+    public ArrayList<ComputerDTO> getComputerByLetter(String letter) throws SQLException{
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        ComputerDTO computer = null;
+        ArrayList<ComputerDTO> listOfComputer = new ArrayList<>();
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null){
+                ptm = conn.prepareStatement("Select * from Computers WHERE Name LIKE ?");
+                ptm.setNString(1,"%" + letter + "%");
+                
+                rs = ptm.executeQuery();
+                while(rs.next()){
+                    String id = rs.getString("Id");
+                    String name = rs.getString("Name");
+                    String description = rs.getString("Description");
+                    String Ram = rs.getString("Ram");
+                    int price = rs.getInt("Price");
+                    computer = new ComputerDTO(id, name, description, Ram, price);
+                    listOfComputer.add(computer);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listOfComputer;
+    }
 }

@@ -7,7 +7,6 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +18,7 @@ import model.AccountDao;
  *
  * @author admin
  */
-public class LoginServlet extends HttpServlet {
+public class getAccountsByFirstLetterServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,21 +32,23 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = "fail.html";
         try {
-            AccountDTO account = new AccountDTO();
             AccountDao dao = new AccountDao();
+            ArrayList<AccountDTO> listOfAccount = new ArrayList<>();
             String name = request.getParameter("name");
-            String password = request.getParameter("password");
-            account = dao.getAccount(name, password);
-            String role = account.getRole();
-            if (account != null && role.equals("Admin")) {
-                response.sendRedirect("AddComputerToDB.html");
-                
+            listOfAccount = dao.getAccountsByFirstLetter(name);
+            if (listOfAccount != null && !listOfAccount.isEmpty()) {
+                url = "getAccountsByFirstLetter.jsp";
+                request.setAttribute("List_Of_Account", listOfAccount);
             } else {
-                response.sendRedirect("fail.html");
+                url = "fail.html";
             }
+
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

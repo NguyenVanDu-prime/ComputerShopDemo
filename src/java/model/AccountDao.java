@@ -47,6 +47,41 @@ public class AccountDao {
         return false;
     }
 
+    public AccountDTO getAccount(String userName, String password) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        AccountDTO account = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement("Select Name, Password, Role from Account Where Name = ? AND Password = ?");
+                ptm.setString(1, userName);
+                ptm.setString(2, password);
+                rs = ptm.executeQuery();
+                if (rs.next()) {
+                    String Name = rs.getNString("Name");
+                    String Password = rs.getNString("Password");
+                    String Role = rs.getNString("Role");
+                    account = new AccountDTO(Name, Password, Role);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return account;
+    }
+
     public List<AccountDTO> getAllAccount() throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -89,10 +124,10 @@ public class AccountDao {
         HashSet<String> listOfRole = new HashSet<>();
         try {
             conn = DBUtils.getConnection();
-            if(conn != null){
+            if (conn != null) {
                 ptm = conn.prepareStatement("Select Role from Account");
                 rs = ptm.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     String role = rs.getNString("Role");
                     listOfRole.add(role);
                 }
@@ -145,5 +180,42 @@ public class AccountDao {
             }
         }
         return result;
+    }
+
+    public ArrayList<AccountDTO> getAccountsByFirstLetter(String username) throws SQLException{
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        AccountDTO account = null;
+        ArrayList<AccountDTO> listOfAccount = new ArrayList<>();
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null){
+                ptm = conn.prepareStatement("SELECT * FROM Account WHERE Name LIKE ?");
+                ptm.setString(1,"%" + username + "%");
+                rs = ptm.executeQuery();
+                while(rs.next()){
+                    String name = rs.getNString("Name");
+                    String password = rs.getNString("Password");
+                    String role = rs.getNString("Role");
+                    account = new AccountDTO(name, password, role);
+                    listOfAccount.add(account);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        
+        return listOfAccount;
     }
 }

@@ -1,22 +1,78 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
--->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>Register Account</title>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <form action = "RegisterAccountToDBServlet" method = POST>
-            name    : <input type = "text" name= "name"> <br>
-            password  : <input type = "text" name = "password"> <br>
-            role : <input type = "text" name = "role"> <br>
-            
-            <input type= "submit" name = "action" value="AddComToDB">
 
-        </form>
+        <style>
+
+            body{
+                font-family: Arial;
+                background-color: #f2f2f2;
+            }
+
+            .container{
+                width: 350px;
+                margin: 100px auto;
+                background-color: white;
+                padding: 25px;
+                border-radius: 10px;
+                box-shadow: 0 0 10px gray;
+            }
+
+            h2{
+                text-align: center;
+            }
+
+            input{
+                width: 100%;
+                padding: 10px;
+                margin-top: 10px;
+                margin-bottom: 15px;
+                border: 1px solid gray;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+
+            .btn{
+                background-color: #007bff;
+                color: white;
+                border: none;
+                cursor: pointer;
+            }
+
+            .btn:hover{
+                background-color: #0056b3;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <h2>Register Account</h2>
+
+            <form action="RegisterAccountToDBServlet" method="POST">
+
+                Name:
+                <input type="text" name="name" required>
+
+                Password:
+                <input type="password" name="password" required>
+
+                Role:
+                <input type="text" name="role" required>
+
+                <input class="btn" type="submit" name="action" value="Register">
+
+            </form>
+
+        </div>
+
     </body>
 </html>

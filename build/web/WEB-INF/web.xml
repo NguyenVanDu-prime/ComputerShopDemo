@@ -8,6 +8,18 @@
         <servlet-name>RegisterAccountToDBServlet</servlet-name>
         <servlet-class>servlet.RegisterAccountToDBServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getAccountsByFirstLetterServlet</servlet-name>
+        <servlet-class>servlet.getAccountsByFirstLetterServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getAccountsByFirstLetter</servlet-name>
+        <servlet-class>getAccountsByFirstLetter</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getComputerByLetterServlet</servlet-name>
+        <servlet-class>servlet.getComputerByLetterServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -16,12 +28,24 @@
         <servlet-name>RegisterAccountToDBServlet</servlet-name>
         <url-pattern>/RegisterAccountToDBServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getAccountsByFirstLetterServlet</servlet-name>
+        <url-pattern>/getAccountsByFirstLetterServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getAccountsByFirstLetter</servlet-name>
+        <url-pattern>/getAccountsByFirstLetter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getComputerByLetterServlet</servlet-name>
+        <url-pattern>/getComputerByLetterServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>RegisterAccountToDB.html</welcome-file>
+        <welcome-file>getComputerByLetter.jsp</welcome-file>
     </welcome-file-list>
 </web-app>

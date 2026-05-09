@@ -3,14 +3,80 @@
 Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
 -->
+
 <html>
     <head>
         <title>Fail</title>
+
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <style>
+
+            body{
+                margin: 0;
+                padding: 0;
+                font-family: Arial, sans-serif;
+                background: #f4f6f9;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+            }
+
+            .container{
+                width: 400px;
+                background: white;
+                padding: 40px;
+                text-align: center;
+                border-radius: 12px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+
+            h1{
+                color: #e53935;
+                margin-bottom: 15px;
+            }
+
+            p{
+                color: #555;
+                margin-bottom: 30px;
+                font-size: 16px;
+            }
+
+            a{
+                text-decoration: none;
+                background: #4CAF50;
+                color: white;
+                padding: 12px 25px;
+                border-radius: 8px;
+                transition: 0.3s;
+                font-size: 15px;
+            }
+
+            a:hover{
+                background: #45a049;
+            }
+
+        </style>
+
     </head>
+
     <body>
-        <div>Login fail</div>
-        <a href="index.html">click here</a>
+
+        <div class="container">
+
+            <h1>Login Failed</h1>
+
+            <p>
+                Username or password is incorrect!
+            </p>
+
+            <a href="index.html">
+                Back To Home
+            </a>
+
+        </div>
+
     </body>
 </html>

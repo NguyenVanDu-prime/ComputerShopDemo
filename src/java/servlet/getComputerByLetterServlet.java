@@ -7,19 +7,18 @@ package servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.AccountDTO;
-import model.AccountDao;
+import model.ComputerDAO;
+import model.ComputerDTO;
 
 /**
  *
  * @author admin
  */
-public class LoginServlet extends HttpServlet {
+public class getComputerByLetterServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,21 +32,20 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        String url = "fail.html";
         try {
-            AccountDTO account = new AccountDTO();
-            AccountDao dao = new AccountDao();
-            String name = request.getParameter("name");
-            String password = request.getParameter("password");
-            account = dao.getAccount(name, password);
-            String role = account.getRole();
-            if (account != null && role.equals("Admin")) {
-                response.sendRedirect("AddComputerToDB.html");
-                
-            } else {
-                response.sendRedirect("fail.html");
+            String letter = request.getParameter("letter");
+            ArrayList<ComputerDTO> listOfComputer = new ArrayList<>();
+            ComputerDAO dao = new ComputerDAO();
+            listOfComputer = dao.getComputerByLetter(letter);
+            if (!listOfComputer.isEmpty()) {
+                request.setAttribute("List_Of_Computer", listOfComputer);
+                url = "getComputerByLetter.jsp";
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
