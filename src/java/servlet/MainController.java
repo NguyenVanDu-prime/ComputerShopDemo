@@ -6,19 +6,16 @@ package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.AccountDTO;
-import model.AccountDao;
 
 /**
  *
- * @author admin
+ * @author Vader
  */
-public class getAccountsByFirstLetterServlet extends HttpServlet {
+public class MainController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -32,23 +29,24 @@ public class getAccountsByFirstLetterServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = "fail.html";
+        String url = "login.html";
         try {
-            AccountDao dao = new AccountDao();
-            ArrayList<AccountDTO> listOfAccount = new ArrayList<>();
-            String name = request.getParameter("name");
-            listOfAccount = dao.getAccountsByFirstLetter(name);
-            if (listOfAccount != null && !listOfAccount.isEmpty()) {
-                url = "getAccountsByFirstLetter.jsp";
-                request.setAttribute("List_Of_Account", listOfAccount);
-            } else {
-                url = "fail.html";
+            String action = request.getParameter("action");
+            if (action == null || action.isEmpty()){
+                url = "login.html";
+            } else if (action.equals("Search")) {
+                url = "getComputerByLetterServlet";
+            } else if (action.equals("Search By Name")) {
+                url = "getAccountsByFirstLetterServlet";
             }
+            
+            
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ex) {
+            ex.printStackTrace();
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
+
         }
     }
 

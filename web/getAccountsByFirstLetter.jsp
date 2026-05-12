@@ -88,7 +88,7 @@
 
             <h1>Search Account By First Letter</h1>
 
-            <form action="getAccountsByFirstLetterServlet" method="POST">
+            <form action="MainController" method="GET">
 
                 <div class="form-group">
                     <label>Enter Name:</label>
@@ -100,7 +100,7 @@
 
                 <input type="submit" 
                        name="action" 
-                       value="Search" />
+                       value="Search By Name" />
 
             </form>
 

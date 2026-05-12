@@ -96,7 +96,7 @@
 
             <h1>Search Computer</h1>
 
-            <form action="getComputerByLetterServlet" method="POST">
+            <form action="MainController" method="GET">
 
                 <div class="form-group">
                     <label>Enter Letter</label>
