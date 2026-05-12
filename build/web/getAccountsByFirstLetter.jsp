@@ -4,7 +4,10 @@
     Author     : admin
 --%>
 
+<%@page import="model.AccountDTO"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="b" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -104,10 +107,37 @@
 
             </form>
 
-            <div class="result">
-                <strong>List Of Account:</strong><br>
-                ${List_Of_Account}
-            </div>
+
+
+            <h1>Scriptlet</h1>
+            <%
+                ArrayList<AccountDTO> listOfAccount = (ArrayList<AccountDTO>) request.getAttribute("List_Of_Account");
+                if (listOfAccount != null && !listOfAccount.isEmpty()) {
+                    for (AccountDTO account : listOfAccount) {
+            %>
+
+            Name : <p><%=account.getName()%></p>
+            Password : <p><%= account.getPassword()%></p>
+            Role : <p><%= account.getRole()%></p>
+            <%
+                }
+            } else {
+            %>
+            <p>List is Empty</p>
+            <%
+                }
+            %>
+
+            <h1>JSTL</h1>
+            <b:if test ="${empty List_Of_Account}" >
+                <p>List is Empty</p>
+            </b:if>
+
+            <b:forEach items="${List_Of_Account}" var="account">
+                Name: <p>${account.name}</p>
+                Password: <p> ${account.password} </p>
+                Role: <p> ${account.role} </p>
+            </b:forEach>    
 
         </div>
 
