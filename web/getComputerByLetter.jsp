@@ -96,7 +96,7 @@
 
             <h1>Search Computer</h1>
 
-            <form action="getComputerByLetterServlet" method="POST">
+            <form action="MainController" method="POST">
 
                 <div class="form-group">
                     <label>Enter Letter</label>
@@ -106,7 +106,7 @@
 
                 <input type="submit" 
                        name="action" 
-                       value="Search">
+                       value="Search Computer">
 
             </form>
 
