@@ -23,16 +23,18 @@ public class ComputerDAO {
         try {
             conn = DBUtils.getConnection();
             if (conn != null) {
-                ptm = conn.prepareStatement("SELECT Name, Ram, Price FROM Computers");
+                ptm = conn.prepareStatement("SELECT * FROM Computers");
 
                 rs = ptm.executeQuery(); // list -> 
                 // khi khong ket qua -> khong hien gi -> co phai = 0 không ?
 
-                while (rs.next()) { // co ket qua la true                  
+                while (rs.next()) { // co ket qua la true 
+                    String id = rs.getString("id");
                     int price = rs.getInt("Price");
+                    String description = rs.getNString("Description");
                     String name = rs.getString("Name");
                     String ram = rs.getString("Ram");
-                    computerDTO = new ComputerDTO(name, ram, price);
+                    computerDTO = new ComputerDTO(id, name, description, ram, price);
                     computerList.add(computerDTO);
                 }
             }
@@ -86,7 +88,7 @@ public class ComputerDAO {
         return result;
     }
 
-    public ArrayList<ComputerDTO> getComputerByLetter(String letter) throws SQLException{
+    public ArrayList<ComputerDTO> getComputerByLetter(String letter) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -94,12 +96,12 @@ public class ComputerDAO {
         ArrayList<ComputerDTO> listOfComputer = new ArrayList<>();
         try {
             conn = DBUtils.getConnection();
-            if(conn != null){
+            if (conn != null) {
                 ptm = conn.prepareStatement("Select * from Computers WHERE Name LIKE ?");
-                ptm.setNString(1,"%" + letter + "%");
-                
+                ptm.setNString(1, "%" + letter + "%");
+
                 rs = ptm.executeQuery();
-                while(rs.next()){
+                while (rs.next()) {
                     String id = rs.getString("Id");
                     String name = rs.getString("Name");
                     String description = rs.getString("Description");
@@ -107,6 +109,70 @@ public class ComputerDAO {
                     int price = rs.getInt("Price");
                     computer = new ComputerDTO(id, name, description, Ram, price);
                     listOfComputer.add(computer);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return listOfComputer;
+    }
+
+    public boolean deleteComputer(String id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        boolean result = false;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement("DELETE FROM Computers WHERE Id=?");
+                ptm.setString(1, id);
+
+                int row = ptm.executeUpdate();
+                if (row > 0) {
+                    result = true;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                ptm.close();
+            }
+        }
+        return result;
+    }
+
+    public ComputerDTO getComputerById(String id) throws SQLException{
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        ComputerDTO computer = null;
+        try {
+            conn = DBUtils.getConnection();
+            if(conn != null){
+                ptm = conn.prepareStatement("SELECT * FROM Computers Where Id = ?");
+                ptm.setString(1, id);
+                
+                rs = ptm.executeQuery();
+                if(rs.next()){
+                    String Id = rs.getString("Id");
+                    String Name = rs.getString("Name");
+                    String Description = rs.getString("Ram");
+                    int Price = Integer.parseInt(rs.getString("Price"));
+                    computer = new ComputerDTO(Id, Name, Description, Name, Price);    
                 }
             }
         } catch (Exception e) {
@@ -122,6 +188,6 @@ public class ComputerDAO {
                 conn.close();
             }
         }
-        return listOfComputer;
+        return computer;
     }
 }

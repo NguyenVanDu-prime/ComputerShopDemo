@@ -15,7 +15,6 @@
         <title>Search Account</title>
 
         <style>
-
             body{
                 margin: 0;
                 padding: 0;
@@ -24,7 +23,7 @@
             }
 
             .container{
-                width: 450px;
+                width: 550px; /* Tăng độ rộng một chút để chứa bảng vừa vặn hơn */
                 margin: 80px auto;
                 background: white;
                 padding: 30px;
@@ -81,8 +80,28 @@
                 color: #333;
             }
 
-        </style>
+            /* CSS mới cho Table */
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 15px;
+            }
 
+            th, td {
+                padding: 12px;
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+
+            th {
+                background-color: #4CAF50;
+                color: white;
+            }
+
+            tr:nth-child(even) {
+                background-color: #f2f2f2;
+            }
+        </style>
     </head>
 
     <body>
@@ -107,37 +126,66 @@
 
             </form>
 
-
-
             <h1>Scriptlet</h1>
             <%
                 ArrayList<AccountDTO> listOfAccount = (ArrayList<AccountDTO>) request.getAttribute("List_Of_Account");
                 if (listOfAccount != null && !listOfAccount.isEmpty()) {
+            %>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Password</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            <%
                     for (AccountDTO account : listOfAccount) {
             %>
-
-            Name : <p><%=account.getName()%></p>
-            Password : <p><%= account.getPassword()%></p>
-            Role : <p><%= account.getRole()%></p>
+                        <tr>
+                            <td><%= account.getName() %></td>
+                            <td><%= account.getPassword() %></td>
+                            <td><%= account.getRole() %></td>
+                        </tr>
             <%
-                }
-            } else {
+                    }
             %>
-            <p>List is Empty</p>
+                    </tbody>
+                </table>
+            <%
+                } else {
+            %>
+                <p>List is Empty</p>
             <%
                 }
             %>
 
             <h1>JSTL</h1>
-            <b:if test ="${empty List_Of_Account}" >
+            <b:if test="${empty List_Of_Account}">
                 <p>List is Empty</p>
             </b:if>
 
-            <b:forEach items="${List_Of_Account}" var="account">
-                Name: <p>${account.name}</p>
-                Password: <p> ${account.password} </p>
-                Role: <p> ${account.role} </p>
-            </b:forEach>    
+            <b:if test="${not empty List_Of_Account}">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Password</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <b:forEach items="${List_Of_Account}" var="account">
+                            <tr>
+                                <td>${account.name}</td>
+                                <td>${account.password}</td>
+                                <td>${account.role}</td>
+                            </tr>
+                        </b:forEach>  
+                    </tbody>
+                </table>
+            </b:if>
 
         </div>
 

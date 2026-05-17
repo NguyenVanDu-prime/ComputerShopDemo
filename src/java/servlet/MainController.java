@@ -33,11 +33,15 @@ public class MainController extends HttpServlet {
         try {
             String action = request.getParameter("action");
             if(action == null || action.isEmpty()){
-                url = "login.html";
+                url = "GetAllComputerServlet";
             }else if(action.equals("Search")){
                 url = "getAccountsByFirstLetterServlet";
             }else if(action.equals("Search Computer")){
                 url = "getComputerByLetterServlet";
+            }else if(action.equals("ListOfComputer")){
+                url = "GetAllComputerServlet";
+            }else if(action.equals("Delete")){
+                url = "DeleteComputerServlet";
             }
             
             
